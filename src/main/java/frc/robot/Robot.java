@@ -87,6 +87,8 @@ public class Robot extends LoggedRobot {
 
     // Return to non-RT thread priority (do not modify the first argument)
     // Threads.setCurrentThreadPriority(false, 10);
+
+    Logger.recordOutput("RobotModel/ComponentPoses", robotContainer.getComponentPoses(0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
   }
 
   /** This function is called once when the robot is disabled. */

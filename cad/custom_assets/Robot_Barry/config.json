@@ -1,0 +1,50 @@
+{
+    "name": "Barry",
+    "isFTC": false,
+    "disableSimplification": true,
+    "rotations": [],
+    "position": [
+        0,
+        0,
+        0
+    ],
+    "cameras": [
+        {
+            "name": "ShooterCamera",
+            "fov": 45,
+            "resolution": [
+                1600,
+                1200
+            ],
+            "position": [
+                0,
+                0,
+                0
+            ],
+            "rotations": []
+        }
+    ],
+    "components": [
+        {
+            "zeroedRotations": [
+                {
+                    "axis": "x",
+                    "degrees": 180
+                },
+                {
+                    "axis": "y",
+                    "degrees": 90
+                },
+                {
+                    "axis": "z",
+                    "degrees": 90
+                }
+            ],
+            "zeroedPosition": [
+                0.5,
+                0.5,
+                3
+            ]
+        }
+    ]
+}

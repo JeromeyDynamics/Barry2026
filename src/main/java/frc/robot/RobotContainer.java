@@ -9,7 +9,10 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -170,4 +173,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return autoChooser.get();
   }
+
+  /** Returns the 3D poses of the robot's components for AdvantageScope */
+  public Pose3d[] getComponentPoses(double roll, double pitch, double yaw, double xOffset, double yOffset, double zOffset) {
+        return new Pose3d[] {
+            new Pose3d(
+                new Translation3d(xOffset, yOffset, zOffset), // the x, y, and z offsets from robot's center (in meters)
+                new Rotation3d(Math.toRadians(roll), Math.toRadians(pitch), Math.toRadians(yaw))
+            )
+        };
+    }
 }
