@@ -1,50 +1,50 @@
 {
-    "name": "Barry",
-    "isFTC": false,
-    "disableSimplification": true,
-    "rotations": [],
-    "position": [
+  "name": "Barry",
+  "isFTC": false,
+  "disableSimplification": true,
+  "rotations": [],
+  "position": [
+    -0.29,
+    -0.312,
+    -0.165
+  ],
+  "cameras": [
+    {
+      "name": "ShooterCamera",
+      "fov": 45,
+      "resolution": [
+        1600,
+        1200
+      ],
+      "position": [
         0,
         0,
         0
-    ],
-    "cameras": [
+      ],
+      "rotations": []
+    }
+  ],
+  "components": [
+    {
+      "zeroedRotations": [
         {
-            "name": "ShooterCamera",
-            "fov": 45,
-            "resolution": [
-                1600,
-                1200
-            ],
-            "position": [
-                0,
-                0,
-                0
-            ],
-            "rotations": []
-        }
-    ],
-    "components": [
+          "axis": "x",
+          "degrees": 0
+        },
         {
-            "zeroedRotations": [
-                {
-                    "axis": "x",
-                    "degrees": 180
-                },
-                {
-                    "axis": "y",
-                    "degrees": 90
-                },
-                {
-                    "axis": "z",
-                    "degrees": 90
-                }
-            ],
-            "zeroedPosition": [
-                0.5,
-                0.5,
-                3
-            ]
+          "axis": "y",
+          "degrees": 0
+        },
+        {
+          "axis": "z",
+          "degrees": 0
         }
-    ]
+      ],
+      "zeroedPosition": [
+        -0.766,
+        -0.184,
+        0.339
+      ]
+    }
+  ]
 }
