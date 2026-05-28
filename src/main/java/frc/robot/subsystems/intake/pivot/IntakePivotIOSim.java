@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import frc.robot.subsystems.intake.IntakeConstants;
 
 public class IntakePivotIOSim implements IntakePivotIO {
+  private static final double SIM_KP = 6.0;
+  private static final double SIM_KD = 0.3;
+
   private final SingleJointedArmSim sim =
       new SingleJointedArmSim(
           IntakeConstants.PIVOT_GEARBOX,
@@ -23,11 +26,10 @@ public class IntakePivotIOSim implements IntakePivotIO {
           IntakeConstants.PIVOT_LENGTH_METERS,
           IntakeConstants.PIVOT_MIN_ANGLE.getRadians(),
           IntakeConstants.PIVOT_MAX_ANGLE.getRadians(),
-          true,
+          false,
           IntakeConstants.PIVOT_STOW_ANGLE.getRadians());
 
-  private final PIDController controller =
-      new PIDController(IntakePivotConstants.kP, IntakePivotConstants.kI, IntakePivotConstants.kD);
+  private final PIDController controller = new PIDController(SIM_KP, 0.0, SIM_KD);
 
   private boolean closedLoop = true;
   private double appliedVolts = 0.0;
@@ -76,5 +78,10 @@ public class IntakePivotIOSim implements IntakePivotIO {
             position.getRadians(),
             IntakeConstants.PIVOT_MIN_ANGLE.getRadians(),
             IntakeConstants.PIVOT_MAX_ANGLE.getRadians()));
+  }
+
+  @Override
+  public void stop() {
+    setPosition(Rotation2d.fromRadians(sim.getAngleRads()));
   }
 }

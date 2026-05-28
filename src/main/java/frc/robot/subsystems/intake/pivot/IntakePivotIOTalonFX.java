@@ -98,7 +98,11 @@ public class IntakePivotIOTalonFX implements IntakePivotIO {
   public void setPosition(Rotation2d position) {
     leader.setControl(
         positionRequest
-            .withPosition(position.getRotations())
+            .withPosition(
+                MathUtil.clamp(
+                    position.getRotations(),
+                    IntakeConstants.PIVOT_MIN_ANGLE.getRotations(),
+                    IntakeConstants.PIVOT_MAX_ANGLE.getRotations()))
             .withFeedForward(IntakePivotConstants.kFF * IntakePivotConstants.kNominalVoltage));
   }
 }

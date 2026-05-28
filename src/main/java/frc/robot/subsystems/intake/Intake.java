@@ -63,7 +63,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void stopPivot() {
-    pivotIO.stop();
+    setPivotPosition(getPivotPosition());
   }
 
   public void stop() {

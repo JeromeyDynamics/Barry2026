@@ -33,8 +33,8 @@ public final class IntakeConstants {
   public static final double PIVOT_LENGTH_METERS = 0.45;
   public static final double PIVOT_MASS_KG = 4.5;
 
-  public static final Rotation2d PIVOT_MIN_ANGLE = Rotation2d.fromDegrees(-20.0);
-  public static final Rotation2d PIVOT_MAX_ANGLE = Rotation2d.fromDegrees(95.0);
+  public static final Rotation2d PIVOT_MIN_ANGLE = Rotation2d.fromDegrees(-95.0);
+  public static final Rotation2d PIVOT_MAX_ANGLE = Rotation2d.fromDegrees(0.0);
   public static final Rotation2d PIVOT_STOW_ANGLE = Rotation2d.fromDegrees(0.0);
-  public static final Rotation2d PIVOT_DEPLOY_ANGLE = Rotation2d.fromDegrees(55.0);
+  public static final Rotation2d PIVOT_DEPLOY_ANGLE = Rotation2d.fromDegrees(-55.0);
 }
