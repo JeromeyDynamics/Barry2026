@@ -3,6 +3,7 @@
 This document tracks the software updates per commit of each day worked on the Barry2026 robot
 
 \* The ⭐ next to a commit means that a major change was pushed there
+\* Commits updating this ProgrammingLog.md are not recorded
 
 ---
 
@@ -65,3 +66,7 @@ This document tracks the software updates per commit of each day worked on the B
 * **Goal:** Add code for the intake and make it compatible with AdvantageScope
 * **Process:** Started with the constants of Larry26 and worked off of there using team 5000's Falcon FX code as reference for the difference from REV.
 * **Etc:** For programming reference with the Falcon FX and the general structure I looked at repos from the past robot, 1257 (https://github.com/FRC1257/2026-Robot/tree/master), & 5000 (https://github.com/hammerheads5000/2026Rebuilt/blob/main/src/main/java/frc/robot/subsystems/intake/IntakeIOTalonFX.java)
+
+### 🛠️ "added simple PIDs (not fully tuned) for the intake and now it works in simulation" (`667e5301fbde0b47432aa0cee86b41e827b5c09b`) ⭐
+* **Goal:** Make it so that pressing the pov left and right buttons on the x-box controller moves the intake pivot up and down with limits at 95 degrees up from the chassis horizontal and at the horizontal which is similar to the bounds of the intake pivot in real life
+* **Process:** Implemented some PIDs which aren't fully tuned, but work for making sure the intake is in the right position. For stopping the arm I simply made it set the position to its own current position since pressing the pov left or right buttons sets a speed on the pivot not a position which locks the motors.
