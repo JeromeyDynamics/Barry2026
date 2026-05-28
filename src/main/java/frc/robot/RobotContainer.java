@@ -27,6 +27,15 @@ import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeConstants;
+import frc.robot.subsystems.intake.IntakeIO;
+import frc.robot.subsystems.intake.IntakeIOSim;
+import frc.robot.subsystems.intake.IntakeIOTalonFX;
+import frc.robot.subsystems.intake.pivot.IntakePivotConstants;
+import frc.robot.subsystems.intake.pivot.IntakePivotIO;
+import frc.robot.subsystems.intake.pivot.IntakePivotIOSim;
+import frc.robot.subsystems.intake.pivot.IntakePivotIOTalonFX;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -36,8 +45,12 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private static final Translation3d INTAKE_PIVOT_POSITION =
+      new Translation3d(0.476, -0.128, 0.339);
+
   // Subsystems
   private final Drive drive;
+  private final Intake intake;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -59,6 +72,7 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+        intake = new Intake(new IntakeIOTalonFX(), new IntakePivotIOTalonFX());
 
         // The ModuleIOTalonFXS implementation provides an example implementation for
         // TalonFXS controller connected to a CANdi with a PWM encoder. The
@@ -88,6 +102,7 @@ public class RobotContainer {
                 new ModuleIOSim(TunerConstants.FrontRight),
                 new ModuleIOSim(TunerConstants.BackLeft),
                 new ModuleIOSim(TunerConstants.BackRight));
+        intake = new Intake(new IntakeIOSim(), new IntakePivotIOSim());
         break;
 
       default:
@@ -99,6 +114,7 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        intake = new Intake(new IntakeIO() {}, new IntakePivotIO() {});
         break;
     }
 
@@ -163,6 +179,30 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), Rotation2d.kZero)),
                     drive)
                 .ignoringDisable(true));
+
+    controller
+        .leftBumper()
+        .whileTrue(
+            intake.runRollersCommand(
+                IntakeConstants.kIntakeInSpeed * IntakeConstants.kNominalVoltage));
+    controller
+        .rightBumper()
+        .whileTrue(
+            intake.runRollersCommand(
+                IntakeConstants.kIntakeOutSpeed * IntakeConstants.kNominalVoltage));
+
+    controller.povUp().onTrue(intake.setPivotPositionCommand(IntakeConstants.PIVOT_DEPLOY_ANGLE));
+    controller.povDown().onTrue(intake.setPivotPositionCommand(IntakeConstants.PIVOT_STOW_ANGLE));
+    controller
+        .povLeft()
+        .whileTrue(
+            intake.runPivotVoltsCommand(
+                IntakePivotConstants.kPivotSpeedUp * IntakePivotConstants.kNominalVoltage));
+    controller
+        .povRight()
+        .whileTrue(
+            intake.runPivotVoltsCommand(
+                IntakePivotConstants.kPivotSpeedDown * IntakePivotConstants.kNominalVoltage));
   }
 
   /**
@@ -174,13 +214,11 @@ public class RobotContainer {
     return autoChooser.get();
   }
 
-  /** Returns the 3D poses of the robot's components for AdvantageScope */
-  public Pose3d[] getComponentPoses(double roll, double pitch, double yaw, double xOffset, double yOffset, double zOffset) {
-        return new Pose3d[] {
-            new Pose3d(
-                new Translation3d(xOffset, yOffset, zOffset), // the x, y, and z offsets from robot's center (in meters)
-                new Rotation3d(Math.toRadians(roll), Math.toRadians(pitch), Math.toRadians(yaw))
-            )
-        };
-    }
+  /** Returns the 3D poses of the robot's components for AdvantageScope. */
+  public Pose3d[] getComponentPoses() {
+    return new Pose3d[] {
+      new Pose3d(
+          INTAKE_PIVOT_POSITION, new Rotation3d(intake.getPivotPosition().getRadians(), 0.0, 0.0))
+    };
+  }
 }
