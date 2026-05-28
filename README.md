@@ -3,6 +3,7 @@ This is a redesign of the Larry 2026 robot code and design from 7587
 
 ## 📂 Project Structure
 * 💻 **Code:** Managed here in this repository.
+  * 📜 **Software Progress:** The entire coding journey where I write down my notes for each commit on the days that I pushed them are tracked in the [Programming Log](ProgrammingLog.md)
 * 🛠️ **CAD Hardware:** Designed through Onshape.
 * 📝 **Progress Tracker:** The CADing journey is listed here in the [Build Log](cad/BuildLog.md).
 
