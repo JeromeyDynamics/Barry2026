@@ -19,18 +19,18 @@ public interface IntakeIO {
     public double currentAmps = 0.0;
   }
 
-  /** 
+  /**
    * Updates the set of loggable inputs.
-   * 
+   *
    * @param inputs The set of loggable inputs to update.
-  */
+   */
   public default void updateInputs(IntakeIOInputs inputs) {}
 
-  /** 
+  /**
    * Applies a specific voltage to the intake roller.
-   * 
+   *
    * @param volts The voltage the intake roller gets set to.
-  */
+   */
   public default void setVoltage(double volts) {}
 
   /** Stops the intake roller. */

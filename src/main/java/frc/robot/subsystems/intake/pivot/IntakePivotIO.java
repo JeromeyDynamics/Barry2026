@@ -20,22 +20,23 @@ public interface IntakePivotIO {
     public double currentAmps = 0.0;
   }
 
-  /** 
+  /**
    * Updates the set of loggable inputs.
-   * 
+   *
    * @param inputs The set of loggable inputs to update.
-  */
+   */
   public default void updateInputs(IntakePivotIOInputs inputs) {}
 
-  /** 
+  /**
    * Applies a specific voltage to the intake pivot.
-   * 
+   *
    * @param volts The voltage the intake pivot gets set to.
-  */
+   */
   public default void setVoltage(double volts) {}
 
   /**
    * Sets the position of the intake pivot.
+   *
    * @param position
    */
   public default void setPosition(Rotation2d position) {}
